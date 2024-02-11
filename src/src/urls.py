@@ -23,6 +23,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("center/", include("center.urls", namespace="center")),
     path("admin/", admin.site.urls),
 ]
 

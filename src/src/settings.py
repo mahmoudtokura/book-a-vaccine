@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
+from django.contrib.messages import constants as messages
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +28,14 @@ SECRET_KEY = "django-insecure-6a$es6e%ut!c8kgh3+t@l#vw7&w)i4s+sgs1q#8eud82$f$yl)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if DEBUG is False:
+    ALLOWED_HOSTS = [
+        "127.0.0.1:8000",
+        "*",
+    ]
+
+if DEBUG is True:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -128,3 +138,12 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+MESSAGE_TAGS = {
+    messages.DEBUG: "alert-secondary",
+    messages.INFO: "alert-info",
+    messages.SUCCESS: "alert-success",
+    messages.WARNING: "alert-warning",
+    messages.ERROR: "alert-danger",
+}

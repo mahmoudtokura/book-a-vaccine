@@ -1,0 +1,90 @@
+{% extends 'site/base.html' %}
+
+<!--  -->
+
+{% block title %}
+<title>Center Detail</title>
+{% endblock title %}
+<!--  -->
+{% block content %}
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title mb-4">
+      <i class="fas fa-map-marker-alt"></i> Center Details
+    </h5>
+
+    <div class="row mb-1">
+      <div class="col-5 col-sm-4 col-md-3 col-lg-2 fw-bold">Center Name</div>
+      <div class="col-7 col-sm-8 col-md-9 col-lg-10">{{center.name}}</div>
+    </div>
+
+    <div class="row mb-1">
+      <div class="col-5 col-sm-4 col-md-3 col-lg-2 fw-bold">Address</div>
+      <div class="col-7 col-sm-8 col-md-9 col-lg-10">
+        <pre>{{center.address}}</pre>
+      </div>
+    </div>
+
+    <div class="row mb-1 btn-container">
+      <div class="col-12">
+        <button class="btn btn-sm btn-dark m-1">
+          <a href="#"> <i class="fas fa-eye"></i> View Storage </a>
+        </button>
+
+        <button class="btn btn-sm btn-success m-1">
+          <a href="{% url 'center:update' center.id %}">
+            <i class="fas fa-pen"></i> Update Center
+          </a>
+        </button>
+
+        <button
+          class="btn btn-sm btn-danger m-1"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          <a href="#"> <i class="fas fa-trash"></i> Delete Center </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Delete {{center.name}}?
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete {{center.name}} from records?
+        <hr />
+        This action is not reversible.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <form action="{% url 'center:delete' center.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Yes, delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
