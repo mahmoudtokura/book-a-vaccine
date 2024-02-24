@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Center
+from .models import Center, Storage
 
 
 class CenterForm(forms.ModelForm):
@@ -25,4 +25,22 @@ class CenterForm(forms.ModelForm):
         """Meta definition for Centerform."""
 
         model = Center
+        fields = "__all__"
+
+
+class StorageForm(forms.ModelForm):
+    """Form definition for Storage."""
+
+    def __init__(self, center_id, *args, **kwargs):
+        super(StorageForm, self).__init__(*args, **kwargs)
+        self.fields["center"].initial = center_id
+        self.fields["center"].disabled = True
+        self.fields["booked_quantity"].disabled = True
+        for visible in self.visible_fields():
+            visible.field.widget.attrs["class"] = "form-control"
+
+    class Meta:
+        """Meta definition for Storageform."""
+
+        model = Storage
         fields = "__all__"

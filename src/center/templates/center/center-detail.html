@@ -28,7 +28,9 @@
     <div class="row mb-1 btn-container">
       <div class="col-12">
         <button class="btn btn-sm btn-dark m-1">
-          <a href="#"> <i class="fas fa-eye"></i> View Storage </a>
+          <a href="{% url 'center:storage' center.id %}">
+            <i class="fas fa-eye"></i> View Storage
+          </a>
         </button>
 
         <button class="btn btn-sm btn-success m-1">

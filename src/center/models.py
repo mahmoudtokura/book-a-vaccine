@@ -17,7 +17,10 @@ class Center(models.Model):
 
     def __str__(self):
         """Unicode representation of Center."""
-        return f"<Center: {self.name}>"
+        return f"{self.name}"
+
+    def __repr__(self) -> str:
+        return f"<{self.name}>"
 
     def get_absolute_url(self):
         """Return absolute url for Center."""
@@ -28,8 +31,11 @@ class Center(models.Model):
 
 class Storage(models.Model):
     """Model definition for Storage."""
+
     center = models.ForeignKey(Center, on_delete=models.CASCADE, related_name="storage")
-    vaccine = models.ForeignKey(Vaccine, on_delete=models.CASCADE, related_name="storage")
+    vaccine = models.ForeignKey(
+        Vaccine, on_delete=models.CASCADE, related_name="storage"
+    )
     total_quantity = models.IntegerField(verbose_name="Total quantity", default=0)
     booked_quantity = models.IntegerField(verbose_name="Booked quantity", default=0)
 
@@ -41,7 +47,11 @@ class Storage(models.Model):
 
     def __str__(self):
         """Unicode representation of Storage."""
-        return f"<Storage: {self.center.name} - {self.vaccine.name}>"
+        return f"{self.center.name} - {self.vaccine.name}"
+
+    # string representation of the object for terminal
+    def __repr__(self):
+        return f"<{self.center.name} - {self.vaccine.name}>"
 
     def get_absolute_url(self):
         """Return absolute url for Storage."""

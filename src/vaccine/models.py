@@ -33,6 +33,9 @@ class Vaccine(models.Model):
 
     def __str__(self):
         """Unicode representation of Vaccine."""
+        return f"{self.name}"
+
+    def __repr__(self):
         return f"<Vaccine: {self.name}>"
 
     def get_absolute_url(self):
